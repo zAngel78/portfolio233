@@ -1,0 +1,14 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo -->
+  <rect width="64" height="64" rx="12" fill="#000000"/>
+  
+  <!-- Borde -->
+  <rect x="2" y="2" width="60" height="60" rx="10" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+  
+  <!-- Letra A -->
+  <path d="M20 44 L28 20 L36 44" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <line x1="23" y1="36" x2="33" y2="36" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Letra V -->
+  <path d="M38 20 L44 44 L50 20" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

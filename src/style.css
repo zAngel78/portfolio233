@@ -1,0 +1,903 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+/* ============================================
+   PANTALLA DE BIENVENIDA
+   ============================================ */
+
+.welcome-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 1s ease-in;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+.welcome-screen.fade-out {
+  animation: fadeOut 0.8s ease-out forwards;
+}
+
+.welcome-content {
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-text-en {
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeInUp 1.2s ease-out 0.3s forwards;
+  letter-spacing: 2px;
+}
+
+.welcome-text-es {
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeInUp 1.2s ease-out 0.8s forwards;
+  color: #ccc;
+}
+
+.welcome-name {
+  font-size: 2.5rem;
+  font-weight: 600;
+  opacity: 0;
+  animation: fadeInUp 1.2s ease-out 1.3s forwards;
+  background: linear-gradient(45deg, #fff, #ccc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 3rem;
+}
+
+.welcome-btn {
+  opacity: 0;
+  animation: fadeInUp 1.2s ease-out 1.8s forwards;
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 1.2rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transition: left 0.4s ease;
+  z-index: -1;
+}
+
+.welcome-btn:hover::before {
+  left: 0;
+}
+
+.welcome-btn:hover {
+  color: #000;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+.welcome-btn span {
+  position: relative;
+  z-index: 1;
+  font-size: 0.9rem;
+}
+
+.welcome-btn span:first-child {
+  font-weight: 700;
+}
+
+.welcome-btn span:last-child {
+  font-size: 0.8rem;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   GALERÍA DE PROYECTOS
+   ============================================ */
+
+.gallery-container {
+  min-height: 100vh;
+  background: #000;
+  padding: 0;
+  transition: opacity 0.1s ease-out, transform 0.1s ease-out;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 8px;
+}
+
+/* ============================================
+   TARJETAS DE PROYECTO
+   ============================================ */
+
+.project-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  animation: fadeInScale 0.5s ease-out backwards;
+  border: 2px solid transparent;
+  border-radius: 12px;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.05s; }
+.project-card:nth-child(2) { animation-delay: 0.1s; }
+.project-card:nth-child(3) { animation-delay: 0.15s; }
+.project-card:nth-child(4) { animation-delay: 0.2s; }
+.project-card:nth-child(5) { animation-delay: 0.25s; }
+.project-card:nth-child(6) { animation-delay: 0.3s; }
+.project-card:nth-child(7) { animation-delay: 0.35s; }
+.project-card:nth-child(8) { animation-delay: 0.4s; }
+.project-card:nth-child(9) { animation-delay: 0.45s; }
+.project-card:nth-child(10) { animation-delay: 0.5s; }
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 15px rgba(30, 58, 138, 0.3);
+  z-index: 10;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.4s ease;
+  filter: grayscale(20%) brightness(0.85);
+}
+
+.project-card:hover .project-image {
+  filter: grayscale(0%) brightness(1.1);
+  transform: scale(1.1);
+}
+
+.project-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: flex-end;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+
+.project-title {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ============================================
+   BOTÓN FLOTANTE DE CONTACTO
+   ============================================ */
+
+.contact-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 9999;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  animation: fadeInUp 1.2s ease-out 2.3s forwards;
+}
+
+.contact-btn:hover {
+  background: #000;
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+}
+
+.contact-btn svg {
+  transition: stroke 0.3s ease;
+}
+
+.contact-btn:hover svg {
+  stroke: #fff;
+}
+
+/* ============================================
+   MODAL DE CONTACTO
+   ============================================ */
+
+.contact-modal-content {
+  max-width: 600px;
+  background: #000;
+}
+
+.contact-modal-body {
+  padding: 3rem;
+  background: #000;
+}
+
+.contact-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.contact-subtitle {
+  color: #999;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: #111;
+  border: 2px solid #222;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  border-color: #fff;
+  transform: translateX(5px);
+}
+
+.contact-item svg {
+  flex-shrink: 0;
+  stroke: #fff;
+  margin-top: 0.2rem;
+}
+
+.contact-item > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-label {
+  color: #999;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.contact-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: #ccc;
+}
+
+/* ============================================
+   MODAL - ESTILO MINIMALISTA BLANCO Y NEGRO
+   ============================================ */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 2rem;
+  backdrop-filter: blur(8px);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+}
+
+.modal-content {
+  background: #000;
+  border-radius: 0;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 
+    0 0 0 3px #fff,
+    0 20px 60px rgba(0, 0, 0, 0.8);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  border: 3px solid #fff;
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: #fff;
+  border: none;
+  color: #000;
+  font-size: 1.8rem;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.modal-close:hover {
+  background: #000;
+  color: #fff;
+  border: 2px solid #fff;
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.modal-image-container {
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+  border-bottom: 3px solid #fff;
+  position: relative;
+  background: #000;
+}
+
+.modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-info {
+  padding: 3rem;
+  background: #000;
+}
+
+.modal-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.modal-description {
+  color: #ccc;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  margin-bottom: 2.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+}
+
+.modal-technologies {
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  background: #111;
+  border: 2px solid #333;
+}
+
+.tech-title {
+  color: #fff;
+  font-size: 0.85rem;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.tech-tags {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.tech-tag-large {
+  background: #000;
+  color: #fff;
+  padding: 0.7rem 1.3rem;
+  border: 1px solid #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tech-tag-large:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.project-link {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+  padding: 1.2rem 2.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 2px solid #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.project-link:hover {
+  background: #000;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .modal-info {
+    padding: 2rem;
+  }
+  
+  .modal-image-container {
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-text-en {
+    font-size: 2rem;
+  }
+  
+  .welcome-text-es {
+    font-size: 1.5rem;
+  }
+  
+  .welcome-name {
+    font-size: 1.8rem;
+  }
+  
+  .welcome-btn {
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+  }
+  
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  
+  .modal-overlay {
+    padding: 1.5rem;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+  }
+  
+  .modal-info {
+    padding: 1.5rem;
+  }
+  
+  .modal-image-container {
+    height: 250px;
+  }
+  
+  .tech-title {
+    font-size: 0.7rem;
+  }
+  
+  .project-link {
+    font-size: 0.7rem;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .modal-close {
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .contact-btn {
+    width: 50px;
+    height: 50px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .contact-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .contact-modal-body {
+    padding: 2rem;
+  }
+  
+  .contact-title {
+    font-size: 1.8rem;
+  }
+  
+  .contact-subtitle {
+    font-size: 1rem;
+  }
+  
+  .contact-item {
+    padding: 1rem;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+  
+  .welcome-text-en {
+    font-size: 1.5rem;
+  }
+  
+  .welcome-text-es {
+    font-size: 1.2rem;
+  }
+  
+  .welcome-name {
+    font-size: 1.5rem;
+  }
+  
+  .welcome-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.8rem;
+  }
+  
+  .welcome-btn span:first-child {
+    font-size: 0.8rem;
+  }
+  
+  .welcome-btn span:last-child {
+    font-size: 0.7rem;
+  }
+  
+  .modal-overlay {
+    padding: 1rem;
+  }
+  
+  .modal-title {
+    font-size: 1.3rem;
+  }
+  
+  .modal-description {
+    font-size: 0.9rem;
+  }
+  
+  .modal-info {
+    padding: 1rem;
+  }
+  
+  .modal-image-container {
+    height: 200px;
+  }
+  
+  .modal-close {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+  
+  .project-link {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.6rem;
+  }
+  
+  .tech-title {
+    font-size: 0.6rem;
+  }
+  
+  .contact-btn {
+    width: 45px;
+    height: 45px;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  
+  .contact-title {
+    font-size: 1.5rem;
+  }
+  
+  .contact-subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ============================================
+   ANIMACIÓN DE ONBOARDING / TIP
+   ============================================ */
+
+.project-card.highlighted {
+  animation: goldenPulse 2s ease-in-out infinite;
+  border-color: #FFD700 !important;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6),
+              0 0 60px rgba(255, 215, 0, 0.4),
+              inset 0 0 20px rgba(255, 215, 0, 0.2) !important;
+  z-index: 50 !important;
+  transform: scale(1.05);
+}
+
+@keyframes goldenPulse {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6),
+                0 0 60px rgba(255, 215, 0, 0.4),
+                inset 0 0 20px rgba(255, 215, 0, 0.2);
+    border-color: #FFD700;
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.8),
+                0 0 80px rgba(255, 215, 0, 0.6),
+                inset 0 0 30px rgba(255, 215, 0, 0.3);
+    border-color: #FFA500;
+  }
+}
+
+.onboarding-tooltip {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #000;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 100;
+  animation: tooltipBounce 0.6s ease-out;
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5),
+              0 0 40px rgba(255, 215, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+}
+
+.onboarding-tooltip::before {
+  content: '👆';
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  animation: pointDown 1s ease-in-out infinite;
+}
+
+.onboarding-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #FFA500;
+}
+
+@keyframes tooltipBounce {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+  }
+  80% {
+    transform: translateX(-50%) translateY(2px);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes pointDown {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(5px);
+  }
+}
+
+/* Responsive para el tooltip */
+@media (max-width: 768px) {
+  .onboarding-tooltip {
+    font-size: 0.8rem;
+    padding: 0.8rem 1.2rem;
+    top: -70px;
+  }
+
+  .onboarding-tooltip::before {
+    font-size: 1.2rem;
+    top: -20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .onboarding-tooltip {
+    font-size: 0.7rem;
+    padding: 0.6rem 1rem;
+    top: -60px;
+    white-space: normal;
+    max-width: 150px;
+    text-align: center;
+  }
+
+  .onboarding-tooltip::before {
+    font-size: 1rem;
+    top: -18px;
+  }
+}
