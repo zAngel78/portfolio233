@@ -132,24 +132,26 @@ export default function WelcomeScreen({ onComplete, onProgress }: WelcomeScreenP
           </button>
         </div>
 
-        {/* Lanyard 3D a la derecha - solo desktop */}
-        {!isMobile && (
-          <div style={{
-            position: 'absolute',
-            right: '-10vw',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            width: '70vw',
-            height: '100vh',
-            zIndex: 1002,
-            overflow: 'visible',
-            pointerEvents: 'none', // Dejar pasar eventos al fondo
-            opacity: progress < 0.7 ? 1 : 1 - ((progress - 0.7) / 0.3),
-            transition: 'opacity 0.2s ease-out'
-          }}>
-            <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} fov={25} />
-          </div>
-        )}
+        {/* Lanyard 3D */}
+        <div style={{
+          position: 'absolute',
+          right: isMobile ? '50%' : '-10vw',
+          top: isMobile ? '55%' : '50%',
+          transform: isMobile ? 'translate(50%, -50%)' : 'translateY(-50%)',
+          width: isMobile ? '90vw' : '70vw',
+          height: isMobile ? '50vh' : '100vh',
+          zIndex: 1002,
+          overflow: 'visible',
+          pointerEvents: 'none',
+          opacity: progress < 0.7 ? 1 : 1 - ((progress - 0.7) / 0.3),
+          transition: 'opacity 0.2s ease-out'
+        }}>
+          <Lanyard 
+            position={[0, 0, isMobile ? 15 : 20]} 
+            gravity={[0, isMobile ? -30 : -40, 0]} 
+            fov={isMobile ? 30 : 25} 
+          />
+        </div>
       </div>
     </>
   );
